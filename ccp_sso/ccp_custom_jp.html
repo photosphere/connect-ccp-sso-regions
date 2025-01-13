@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<meta charset="UTF-8" />
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/amazon-connect-streams"></script>
+</head>
+
+<body onload="init()">
+  <div id="ccp-container" style="width: 400px; height: 600px"></div>
+
+  <script type="text/javascript">
+    function init() {
+      var instanceURL = "https://connect-jp-sso.my.connect.aws/ccp-v2/";
+      var loginURL = "https://d-92677e6c79.awsapps.com/start/#/saml/default/Amazon%20Connect%20JP/ins-223d5227eef7a172";
+      connect.agentApp.initApp(
+        "ccp",
+        "ccp-container",
+        instanceURL,
+        {
+          style: "width:100%; height:800px;",
+          ccpParams: {
+            loginUrl: loginURL,
+            loginPopup: true,
+            loginPopupAutoClose: true
+          }
+        }
+      );
+
+
+      connect.contact(subscribeToContactEvents);
+
+      connect.agent(subscribeToAgentEvents);
+    }
+
+    function subscribeToContactEvents(c) {
+      c.onConnecting(function (c) {
+        console.log("Contact ringing");
+      });
+
+      c.contact.onConnected(function (c) {
+        console.log("Contact connected to agent");
+
+        window.contact = c;
+        window.agentConnection = c.getAgentConnection();
+      });
+    }
+
+    function subscribeToAgentEvents(agent) {
+      console.log("Agent login");
+
+      agent.onStateChange((event) => {
+      });
+
+      agent.onOffline((event) => {
+      });
+    }
+  </script>
+</body>
+
+</html>

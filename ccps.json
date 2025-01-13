@@ -1,0 +1,14 @@
+[
+    {
+        "displayName": "Singapore",
+        "ccpPage": "ccp_sso/ccp_custom_sg.html"
+    },
+    {
+        "displayName": "US",
+        "ccpPage": "ccp_sso/ccp_custom_us.html"
+    },
+    {
+        "displayName": "Japan",
+        "ccpPage": "ccp_sso/ccp_custom_jp.html"
+    }
+]
